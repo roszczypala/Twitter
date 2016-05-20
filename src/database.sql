@@ -1,7 +1,17 @@
-<?php
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+CREATE TABLE User (
+id INT AUTO_INCREMENT NOT NULL,
+email VARCHAR(100) UNIQUE NOT NULL,
+password VARCHAR(255)NOT NULL,
+fullName VARCHAR(100) NOT NULL,
+active TINYINT(1) DEFAULT 1,
+PRIMARY KEY(id)
+)
 
+CREATE TABLE Tweet (
+tweet_id INT AUTO_INCREMENT NOT NULL,
+tweet TEXT,
+user_id INT,
+PRIMARY KEY(tweet_id)
+)
+
+SELECT * FROM Tweet LEFT JOIN User ON User.id = Tweet.tweet_id;
