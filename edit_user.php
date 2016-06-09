@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <?php
-session_start();   
+session_start();
 require_once './src/User.php';
 require_once './src/Tweet.php';
 require_once './src/connection.php';
 
-if(!isset($_SESSION['loggedUserId'])) {
-    header("Location: login.php");    
+if (!isset($_SESSION['loggedUserId'])) {
+    header("Location: login.php");
 }
 ?>
 <html>
@@ -33,17 +33,17 @@ if(!isset($_SESSION['loggedUserId'])) {
             Delete user:
             <button type="submit" name="submit" value="delete_user">Delete</button>
         </form>
-        
+
         <?php
         $oldUser = new User();
         $oldUser->loadFromDB($conn, $_SESSION['loggedUserId']);
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             switch ($_POST['submit']) {
                 case 'new_user_info':
                     $oldUser->setFullName($_POST['new_full_name']);
-                    echo "you've changed yor full name to: ".$_POST['new_full_name'];
+                    echo "you've changed yor full name to: " . $_POST['new_full_name'];
                     $oldUser->saveToDB($conn);
                     break;
 
@@ -51,7 +51,7 @@ if(!isset($_SESSION['loggedUserId'])) {
                     $oldUser->setPassword($_POST['new_password'], $_POST['new_password_repeated']);
                     echo "you've set new password";
                     $oldUser->saveToDB($conn);
-                    break; 
+                    break;
 
                 case 'delete_user':
                     $oldUser->deleteUser($conn);
